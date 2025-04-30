@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>手机回收平台</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 text-gray-800">
+  <div class="max-w-4xl mx-auto px-4 py-10">
+
+    <!-- 步骤展示 -->
+    <div class="grid md:grid-cols-3 gap-6 mb-10">
+      <div class="bg-white rounded-2xl shadow-lg p-6 flex flex-col items-center text-center border-t-4 border-blue-500">
+        <svg class="w-10 h-10 text-blue-500 mb-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path d="M3 10h18M3 6h18M3 14h18M3 18h18" />
+        </svg>
+        <h3 class="font-bold text-xl mb-1">步骤一</h3>
+        <p class="text-gray-600">填写信息，获取估价</p>
+      </div>
+      <div class="bg-white rounded-2xl shadow-lg p-6 flex flex-col items-center text-center border-t-4 border-yellow-500">
+        <svg class="w-10 h-10 text-yellow-500 mb-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path d="M8 10h.01M12 10h.01M16 10h.01M9 16h6M4 6h16M4 6l8 6 8-6" />
+        </svg>
+        <h3 class="font-bold text-xl mb-1">步骤二</h3>
+        <p class="text-gray-600">人工沟通，确认方案</p>
+      </div>
+      <div class="bg-white rounded-2xl shadow-lg p-6 flex flex-col items-center text-center border-t-4 border-green-500">
+        <svg class="w-10 h-10 text-green-500 mb-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path d="M12 8c-2.21 0-4 1.79-4 4v4h8v-4c0-2.21-1.79-4-4-4z" />
+          <path d="M16 4h-1.05a4 4 0 00-7.9 0H6a2 2 0 00-2 2v2h16V6a2 2 0 00-2-2z" />
+        </svg>
+        <h3 class="font-bold text-xl mb-1">步骤三</h3>
+        <p class="text-gray-600">安排物流、验机、打款</p>
+      </div>
+    </div>
+
+    <!-- 表单内容 -->
+    <form class="bg-white p-6 rounded-xl shadow-md space-y-6" method="POST" enctype="multipart/form-data">
+      <div>
+        <label class="block font-semibold mb-1">邮箱（必填）</label>
+        <input type="email" name="email" required class="w-full border p-3 rounded-md">
+      </div>
+
+      <div>
+        <label class="block font-semibold mb-1">手机描述与客户信息（选填）</label>
+        <textarea name="description" maxlength="10000" rows="6" placeholder="1、什么型号手机？2、存储容量？3、屏幕/外观/成色/..." class="w-full border p-3 rounded-md"></textarea>
+      </div>
+
+      <div>
+        <label class="block font-semibold mb-1">上传图片（最多3张）</label>
+        <input type="file" name="images" accept="image/*" multiple class="block" id="imageInput">
+        <div id="imagePreviews" class="mt-4 flex space-x-4"></div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-2">
+        <input type="url" name="image_url1" placeholder="图片链接 1（选填）" class="border p-2 rounded-md">
+        <input type="url" name="image_url2" placeholder="图片链接 2（选填）" class="border p-2 rounded-md">
+        <input type="url" name="image_url3" placeholder="图片链接 3（选填）" class="border p-2 rounded-md">
+      </div>
+
+      <div>
+        <label class="block font-semibold mb-2">期望处理方式（必选）</label>
+        <div class="grid md:grid-cols-2 gap-4">
+          <label class="cursor-pointer block border rounded-xl p-4 shadow-sm hover:ring-2 hover:ring-blue-400 transition group">
+            <input type="radio" name="option" value="直接回收" class="sr-only peer" required>
+            <div class="flex items-center space-x-4">
+              <div class="w-10 h-10 bg-blue-100 text-blue-600 flex items-center justify-center rounded-full">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path d="M3 10h18M3 14h18" />
+                </svg>
+              </div>
+              <div>
+                <h4 class="text-lg font-bold peer-checked:text-blue-600">直接回收</h4>
+                <p class="text-gray-500 text-sm">无需沟通，直接按平台价回收</p>
+              </div>
+            </div>
+          </label>
+
+          <label class="cursor-pointer block border rounded-xl p-4 shadow-sm hover:ring-2 hover:ring-blue-400 transition group">
+            <input type="radio" name="option" value="询价后决定" class="sr-only peer">
+            <div class="flex items-center space-x-4">
+              <div class="w-10 h-10 bg-yellow-100 text-yellow-600 flex items-center justify-center rounded-full">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path d="M8 10h.01M12 10h.01M16 10h.01M9 16h6" />
+                </svg>
+              </div>
+              <div>
+                <h4 class="text-lg font-bold peer-checked:text-yellow-600">询价后决定</h4>
+                <p class="text-gray-500 text-sm">客服沟通后再确定是否回收</p>
+              </div>
+            </div>
+          </label>
+        </div>
+      </div>
+
+      <button type="submit" class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition">提交</button>
+    </form>
+
+    <div id="order-id" class="mt-6 text-center text-xl font-bold text-green-600 hidden"></div>
+  </div>
+
+  <script>
+    // 图片上传预览功能
+    document.getElementById('imageInput').addEventListener('change', function(event) {
+      const imagePreviewContainer = document.getElementById('imagePreviews');
+      imagePreviewContainer.innerHTML = ''; // 清空之前的预览
+      const files = event.target.files;
+      Array.from(files).forEach(file => {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const img = document.createElement('img');
+          img.src = e.target.result;
+          img.classList.add('w-20', 'h-20', 'object-cover', 'rounded-lg');
+          imagePreviewContainer.appendChild(img);
+        };
+        reader.readAsDataURL(file);
+      });
+    });
+
+    // 模拟显示订单号
+    const form = document.querySelector("form");
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const orderId = Math.floor(Math.random() * 1000000).toString().padStart(6, '0');
+      document.getElementById("order-id").textContent = `订单编号：#${orderId}`;
+      document.getElementById("order-id").classList.remove("hidden");
+    });
+  </script>
+</body>
+</html>
